@@ -52,10 +52,4 @@ python multi_seed.py    # aggregate metrics over multiple seeds
 python sensitivity.py   # labeling-mechanism sweep + feature-group ablation
 ```
 
-## Data
 
-The raw campus records are **not redistributed** (privacy and third-party access). `features_real.py` describes the expected layout so you can rebuild the feature table from your own mirror of the data.
-
-## Notes
-
-The experiment scripts import a synthetic-data generator and a shared figure style module that are not part of this upload (`synth_data.py` for `run_experiments.py` / `multi_seed.py`; `plot_style.py` for `sensitivity.py`). Add them to run the scripts out of the box.
