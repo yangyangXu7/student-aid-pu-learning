@@ -1,0 +1,61 @@
+{
+  "source_validation": {
+    "status": "PASS",
+    "tablematchcount": 37,
+    "figurematchcount": 15,
+    "models_retrained": false,
+    "source_computational_scripts_modified": false,
+    "default_reproduction": "All numerical summaries, baseline denominator and fitted-propensity diagnostics, 400000 sampling draws, numerical table/figure-source exports regenerated.",
+    "verify_scope": {
+      "status": "PASS",
+      "models_retrained": false,
+      "full_prediction_cache_available": false,
+      "omitted_nonbaseline_prediction_cache_files": 3687,
+      "original_metric_checks": "audit seeds 42, 91, 141 wherever present in each scenario",
+      "completion_baseline": {
+        "status": "PASS",
+        "baseline_cohorts": 100,
+        "completion_score_vectors": 1100,
+        "max_recomputed_metric_error": 0.0,
+        "logistic_consistency": "all five methods, all 100 baseline cohorts"
+      },
+      "numerical_checks": "logistic and joint-likelihood gradients, soft-label equivalence, posterior identity",
+      "additional_audits": "all included denominator, convergence, and optimizer prediction arrays",
+      "limitation": "Nonbaseline completion prediction arrays were not independently rechecked; regenerate omitted caches using the full retraining commands for the full prediction audit."
+    },
+    "additional_audits": {
+      "status": "PASS",
+      "audited_score_vectors": 2119,
+      "max_recomputed_metric_error": 0.0,
+      "all_npz_files_checked": 1080,
+      "all_arrays_checked": 6773,
+      "numeric_arrays_all_finite": true
+    },
+    "original_verification": {
+      "status": "PASS",
+      "checks": [
+        "U-only population, floor, hidden denominator, original-ID tie order and permutation invariance",
+        "Zero shortlist precision undefined; recall zero with positive denominator",
+        "All clean mechanisms: finite features, valid propensity and one-sided labels",
+        "Conditional propensity integral convergence and population identity",
+        "Recomputed all metrics from stored predictions for 79 cohort/scenario files",
+        "Original supplied metrics.csv reproduced at its four-decimal precision",
+        "All original five-method 10-seed AP means and SDs match uploaded aggregate",
+        "All original four-slope, four-method 5-seed AP and hidden-recall means match uploaded sweep",
+        "All original 5-seed feature-ablation AP and hidden-recall means match uploaded aggregate",
+        "Every one of 35 scenarios regenerated at its first seed with exact SHA256 match"
+      ]
+    },
+    "numerical_checks": {
+      "gradient_fd_error": 1.0368755826751668e-05,
+      "soft_vs_duplicated_sklearn_max_probability_error": 6.772498728491172e-08,
+      "joint_likelihood_gradient_fd_error": 1.5098827315108854e-07
+    },
+    "logpath": "/workspace/scratch/6f5f5f51aa5d/tmp/compact_delivery/verified_run.log",
+    "output": "/workspace/scratch/6f5f5f51aa5d/tmp/compact_delivery/verified_run"
+  },
+  "dataset_check": "PASS: 100 complete baseline datasets; 12,000 rows and 14 features each.\nPASS: all training/test splits and labels match the saved baseline predictions.",
+  "unchanged_scientific_files_checked": 4855,
+  "omitted_prediction_caches": 3687,
+  "scope": "All complete baseline datasets, scientific source and numerical records retained. Most nonbaseline student-level prediction caches omitted and reproducible by training code."
+}

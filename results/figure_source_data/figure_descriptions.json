@@ -1,0 +1,66 @@
+[
+  {
+    "label": "Fig 1",
+    "file": "Fig1",
+    "title": "Precision-recall curves among unlabeled test students.",
+    "caption": "Panel A shows HGB procedures and Panel B shows logistic procedures and the added EM estimators for the fixed seed 42 baseline cohort. Both recall and precision are calculated within U, the test students with S = 0. The dotted horizontal line marks the realized hardship prevalence within this unlabeled test population. Legend values report AP_U for this cohort. Models trained on true hardship labels are learner-specific references. This fixed-seed illustration is distinct from the aggregate comparison across 100 cohorts in Table 1; it does not establish the representativeness of any single cohort.",
+    "placement": "放在 Results 主实验第一段首次引用 Fig 1 的段落之后，紧邻 Table 1。对应修改指南第 12 节首段及第 17 节 Fig 1。用该图替换旧的单张 PR 曲线图，不能把旧图的全体测试人群口径与新图的 U-only 口径混用。保留固定种子 42 的说明，不将单个队列的曲线写成 100 次实验的均值。图注位于稿件正文，图像内只保留必要的轴标签、图例和面板标识。",
+    "source_labels": "Fig 1"
+  },
+  {
+    "label": "Fig 2",
+    "file": "Fig2",
+    "title": "Screening capacity and yield among unlabeled test students.",
+    "caption": "Curves show cohort means for the HGB procedures and the low-spending baseline across 100 baseline cohorts. Capacity ranges from 1% to 30% of U. Panel A reports hidden-positive recall, the fraction of true positives in U recovered by the shortlist; shading shows pointwise 95% cohort bootstrap intervals. Panel B reports precision, the fraction of shortlisted students with true hardship, and displays means without uncertainty bands. Previously recorded positives do not occupy shortlist places. The complete comparison of methods and fixed capacities is reported in Table 1.",
+    "placement": "放在 Results 的容量分析段之后，也就是讨论 5%、10% 和 15% 容量下收益差异的段落之后。对应修改指南第 12 节容量结果段及第 17 节 Fig 2。正文应明确分母是未标注测试学生数，不是全体测试学生数。保留召回率面板的逐点区间说明，不能把右侧精确率均值曲线解释为也附有置信带。",
+    "source_labels": "Fig 2"
+  },
+  {
+    "label": "Fig 3",
+    "file": "Fig3",
+    "title": "Paired Spy HGB differences across labeling mechanisms.",
+    "caption": "Points show the mean within-cohort difference between Spy HGB and naive HGB under eight specified labeling mechanisms. Panel A reports AP_full over the entire test population. Panel B reports hidden-positive recall at a capacity of 10% of U. Each mechanism uses 100 matched cohorts, with both methods evaluated on the same training and test split within each cohort. Error bars are unadjusted percentile 95% bootstrap intervals from 10,000 resamples of cohort-level differences. The vertical reference line marks zero difference; positive values favor Spy HGB. The constant-labeling setting is the same cached zero-slope setting used in Fig 7A-B.",
+    "placement": "放在 Results 的八种标注机制比较段之后，与 Table 3 相邻。对应修改指南第 12 节机制结果段及第 17 节 Fig 3。保留反向标注机制的正向差值，不能继续使用优势消失的旧结论。左面板使用 AP_full，不能在正文或轴标签中误写成 AP_U。",
+    "source_labels": "Fig 3"
+  },
+  {
+    "label": "Fig 4",
+    "file": "Fig4",
+    "title": "Paired comparisons with naive logistic regression across labeling mechanisms.",
+    "caption": "Points show mean within-cohort differences for Spy logistic regression, SAR-EM, Index-EM, and LBE-LF relative to naive logistic regression. Panel A reports AP_U and Panel B reports hidden-positive recall at a capacity of 10% of U. Each of the eight mechanisms uses 100 matched cohorts. Error bars are unadjusted percentile 95% bootstrap intervals from 10,000 cohort resamples. The vertical reference line marks zero difference; positive values favor the named method. Index-EM is the restricted-index adaptation specified in Methods, while LBE-LF is a distinct linear implementation of labeling bias estimation.",
+    "placement": "紧接 Fig 3 所在的跨机制比较段，在正文首次说明逻辑回归家族的配对结果时引用。对应修改指南第 17 节 Fig 4。该图补足同一学习器家族内的比较，不用来证明某一种标签处理方式在所有学习器中都有效。Index-EM 与 LBE-LF 必须分别命名，不能沿用旧图中混合的 LBE 名称。",
+    "source_labels": "Fig 4"
+  },
+  {
+    "label": "Fig 5",
+    "file": "Fig5",
+    "title": "Paired Spy HGB differences under stress settings.",
+    "caption": "Points show the mean within-cohort difference in average precision among unlabeled test students (AP_U), calculated as Spy HGB minus naive HGB. Error bars are unadjusted 95% percentile bootstrap intervals from 10,000 cohort resamples. All ten stress settings (50 matched cohorts each) and the alternative generator (100 matched cohorts) are retained. Positive values favor Spy HGB; negative values favor naive HGB. False-positive record probabilities are conditional on Y = 0. This within-learner comparison does not rank Spy against the EM or LBE-LF estimators.",
+    "placement": "放在压力测试结果段。正文明确这是Spy HGB减naive HGB的配对差值，不能沿用旧图的多方法绝对指标描述。完整多方法结果保留在数值数据中。",
+    "source_labels": "Fig 5"
+  },
+  {
+    "label": "Fig 6",
+    "file": "Fig6",
+    "title": "Simulator-assisted diagnostics of propensity denominators, calibration, and output clipping.",
+    "caption": "Each row compares division by the individual latent labeling probability q_tau (circles; abbreviated q in the figure) with division by the conditional propensity e(X) (squares), defined as E[q_tau | X, Y = 1]. Points show mean AP_full over 100 baseline cohorts; error bars are 95% cohort bootstrap intervals. Thin gray segments connect the two denominator choices within the same numerator configuration; they do not represent confidence intervals for their difference. Each denominator is evaluated for every test observation without selection according to its true class. Raw fitted numerators use the full training set; calibrated numerators use an 80% training subset for fitting and the remaining 20% for Platt calibration. Their comparison therefore also changes the training allocation. The capped configuration limits the divided score to one. Known population numerators and conditional propensities are simulator-assisted references unavailable to practical learners. These are diagnostic comparisons, not additional deployable methods or a proof of identification.",
+    "placement": "放在 Results 的倾向概率诊断段之后。对应修改指南第 10 节新增方法、第 12 节诊断结果段及第 17 节 Fig 6。正文同步区分单个记录的潜在概率 q_tau 与给定观测特征后的条件倾向概率。raw 与 calibrated 两种分子使用的训练安排不同，因此图示不应被写成仅改变校准步骤的严格消融。使用真实测试 Y 为负类选择分母的 INVALID 变体不能混入有效诊断比较。原有 oracle propensity 图及图注应更新，不能把这类诊断称为可部署模型或理论上限。",
+    "source_labels": "Fig 6"
+  },
+  {
+    "label": "Fig 7",
+    "file": "Fig7",
+    "title": "Sensitivity to the inverse-labeling slope.",
+    "caption": "Points show mean hidden-positive recall at capacities of 5% (A) and 10% (B) of U for the HGB procedures, using 100 cohorts per slope. Error bars are pointwise 95% cohort bootstrap intervals. The labeling-rule intercept is 0.55 + 0.55 times the slope, with bounds of 0.10 and 0.92. The zero-slope setting is the constant-labeling scenario. The slope-0.62 setting differs from the main baseline, which uses intercept 0.88 and bounds of 0.12 and 0.88. Elkan-Noto denotes the weighted HGB procedure.",
+    "placement": "放在斜率敏感性结果段。Spy配置网格取消独立图，用正文短段落概括。",
+    "source_labels": "S1 Fig only; former S2 Fig becomes prose"
+  },
+  {
+    "label": "Fig 8",
+    "file": "Fig8",
+    "title": "Sampling-design simulation for prospective verification of screening recall.",
+    "caption": "The design verifies all students shortlisted by Spy HGB at a capacity of 10% of U and a simple random sample without replacement of 50, 100, 200, or 400 nonselected students. Each of 100 baseline cohorts contributes 1,000 sampling draws per sample size. Panel A shows the cohort mean exact hypergeometric probability of finding no missed positive in the nonselected sample. Panel B shows the mean cohort-specific root mean squared error of the weighted recall ratio estimator across the 1,000 draws. Missed cases receive inverse-inclusion-probability weights. Error bars are 95% cohort bootstrap intervals. The simulation assumes complete participation and correct verification; it is not an audit of real students. Observing no missed case does not establish complete recall.",
+    "placement": "放在 Results 最后的抽样核实设计模拟段之后，Discussion 可再次引用。",
+    "source_labels": "S4 Fig"
+  }
+]

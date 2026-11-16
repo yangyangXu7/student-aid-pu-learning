@@ -1,0 +1,8 @@
+START 2 tasks workers 1 code 07f76d01e98c8ba9dfd691d97b3563132d9c0e371d1839d4a1396901bac0093c
+PROGRESS 2 / 2 elapsed_s 7 ('logistic_learner', 42, 'done', 0.17049479484558105)
+COMPLETE 2 seconds 6.817270278930664
+START 1 cohorts 1 workers fa92980cc1578e2d7a33ef9ab04be2cd8b2afc4b610126543a5705571d925524
+PROGRESS 1 / 1 elapsed 11 ('baseline', 42, 'done', 11.43)
+COMPLETE 1 seconds 11
+1 / 1 (42, 1.23)
+{"status": "PASS", "numerical": {"gradient_fd_error": 1.0368755826751668e-05, "soft_vs_duplicated_sklearn_max_probability_error": 6.772498728491172e-08, "joint_likelihood_gradient_fd_error": 1.5098827315108854e-07}}

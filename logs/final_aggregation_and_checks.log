@@ -1,0 +1,74 @@
+ALL 1700 PRIMARY COHORTS PRESENT
+RUN summarize_completion.py
+Combined benchmark 1700 cohort settings; 28900 score/cohort rows; 4114 summaries; 7260 paired contrasts.
+Summarized denominator and audit-design checks.
+RUN verify_completion.py
+{"status": "PASS", "numerical": {"gradient_fd_error": 1.0368755826751668e-05, "soft_vs_duplicated_sklearn_max_probability_error": 6.772498728491172e-08, "joint_likelihood_gradient_fd_error": 1.5098827315108854e-07}}
+verified 1700 cohorts; nonconverged 231
+RUN polish_capped_lbe.py
+false_positive_rate_0.01 89 gradient 4.690543225104039e-09 AP_change -8.49873815921276e-05
+alternative_factors 135 gradient 3.5323999926605603e-09 AP_change -0.34201354014334195
+alternative_factors 123 gradient 5.803599573496663e-09 AP_change -0.29835581126608834
+noise_scale_1.5 47 gradient 8.807364212230045e-09 AP_change -0.25379808966736106
+false_positive_rate_0.03 57 gradient 7.464427898536065e-09 AP_change -0.00038984400186037327
+false_positive_rate_0.03 76 gradient 1.359235000381307e-08 AP_change -7.817985835967267e-05
+false_positive_rate_0.03 61 gradient 2.8700556164866695e-08 AP_change -8.270338259830368e-05
+false_positive_rate_0.03 44 gradient 4.140490802823346e-09 AP_change -0.0001374210286454458
+false_positive_rate_0.03 55 gradient 2.6362424574638025e-08 AP_change -0.0002867171400490198
+false_positive_rate_0.03 47 gradient 2.5259874322197493e-09 AP_change 0.001014787369090775
+false_positive_rate_0.03 59 gradient 2.5736746319195346e-08 AP_change -6.155555303133387e-05
+false_positive_rate_0.03 86 gradient 1.1380787795176964e-08 AP_change -0.00037649183334798053
+false_positive_rate_0.03 50 gradient 5.84995625308951e-09 AP_change -0.0001541724996658722
+false_positive_rate_0.03 56 gradient 5.035726222071692e-09 AP_change -0.0009077601599175589
+false_positive_rate_0.03 91 gradient 1.395415299060143e-08 AP_change -0.0001492274276329031
+false_positive_rate_0.03 64 gradient 4.521024760429043e-09 AP_change 5.2606544202582484e-05
+false_positive_rate_0.03 80 gradient 2.056163749417249e-08 AP_change -0.0006160756144398816
+false_positive_rate_0.03 78 gradient 8.910279304061572e-09 AP_change -1.4986675489381263e-05
+false_positive_rate_0.03 83 gradient 1.639217843348227e-08 AP_change -8.111043011271857e-05
+overlap_1.0 72 gradient 5.063495172177328e-09 AP_change -0.00662707682657393
+overlap_1.0 87 gradient 2.52711270542145e-08 AP_change -0.011291424953627227
+overlap_1.0 73 gradient 4.555012405920869e-09 AP_change -0.0012322571459628673
+overlap_1.0 88 gradient 1.105104426403954e-08 AP_change -0.03213576063048362
+overlap_1.0 84 gradient 7.793188746819676e-09 AP_change -0.0231913266985998
+overlap_1.0 71 gradient 1.531363970100157e-08 AP_change -0.003910185795600207
+overlap_1.0 76 gradient 2.721742905551071e-09 AP_change -0.018991399008670973
+overlap_1.0 75 gradient 4.2450282060637504e-08 AP_change -0.019858422348355997
+overlap_1.0 85 gradient 2.4751546777180914e-09 AP_change 0.008376712039636747
+overlap_1.0 89 gradient 1.3863234627375485e-08 AP_change -0.06312914736595177
+overlap_1.0 91 gradient 4.22280281000697e-08 AP_change -0.04551128145790395
+overlap_1.0 74 gradient 2.21457864545799e-08 AP_change -0.06809922940902502
+overlap_1.0 82 gradient 3.898112071610785e-09 AP_change -0.03158033720126907
+overlap_1.0 80 gradient 4.8790018609386136e-08 AP_change -0.0072360578682031385
+overlap_1.0 78 gradient 3.136834867914363e-09 AP_change -0.04463319828357504
+overlap_1.0 79 gradient 6.500509210733042e-09 AP_change -0.06413552609914541
+overlap_1.0 90 gradient 5.891789683239724e-09 AP_change 0.031235238265522325
+overlap_1.0 83 gradient 2.0543596459937796e-09 AP_change 0.0068529281003153475
+overlap_1.0 81 gradient 3.590317999753919e-09 AP_change -0.041453486149982455
+noise_scale_2.0 47 gradient 1.8738472954382955e-08 AP_change -0.26655039206679737
+noise_scale_2.0 86 gradient 9.791528656501908e-09 AP_change -0.294017707521241
+noise_scale_2.0 66 gradient 2.8142265624709577e-09 AP_change -0.303841506092032
+Complete optimizer audit for currently available primary cap cases: 188
+RUN aggregate_optimizer_audit.py
+                scenario  metric   n  primary_capped_n  primary_mean  same_objective_policy_mean  difference    ci_low   ci_high  not_stationary_n
+     alternative_factors AP_full 100                 2      0.905128                    0.898725   -0.006404 -0.016228  0.000000                 0
+false_positive_rate_0.01 AP_full  50                 1      0.966059                    0.966058   -0.000002 -0.000005  0.000000                 0
+false_positive_rate_0.03 AP_full  50                15      0.964476                    0.964431   -0.000045 -0.000109  0.000019                 0
+         frugal_rate_0.0 AP_full  50                50      0.999909                    0.997148   -0.002760 -0.003740 -0.001883                 0
+         noise_scale_1.5 AP_full  50                 1      0.923760                    0.918684   -0.005076 -0.015228  0.000000                 0
+         noise_scale_2.0 AP_full  50                 3      0.871216                    0.853928   -0.017288 -0.039358  0.000000                 0
+            nonmonotonic AP_full 100                25      0.943481                    0.877065   -0.066416 -0.089975 -0.044445                 0
+             overlap_0.5 AP_full  50                45      0.780754                    0.617874   -0.162880 -0.179885 -0.143908                 0
+             overlap_1.0 AP_full  50                46      0.616844                    0.596253   -0.020591 -0.028076 -0.013432                 0
+WAIT FOR HIGHER-BUDGET AUDITS 219 cohort files
+RUN summarize_numerical_sensitivity.py
+     model   n  extended_converged_n  AP_full_difference_mean  AP_full_difference_absmax  AP_U_difference_mean  AP_U_difference_absmax  HR_U_10_difference_mean  HR_U_10_difference_absmax
+    LBE_LF 188                    59                -0.057386                   0.207070             -0.095215                0.334699                -0.023419                   0.253394
+R1_IndexEM   4                     4                -0.077438                   0.252625             -0.098461                0.347735                -0.094190                   0.307692
+    SAR_EM  39                    39                 0.002707                   0.222521              0.008731                0.247298                 0.000163                   0.227053
+RUN verify_additional_audits.py
+{"status": "PASS", "audited_score_vectors": 2119, "max_recomputed_metric_error": 0.0, "all_npz_files_checked": 4767, "all_arrays_checked": 33695, "numeric_arrays_all_finite": true}
+RUN write_release_map.py
+Wrote 23 figure/table mappings and 4667 executed output records.
+RUN make_completion_outputs.py
+Wrote final report, paper tables and seven added figures.
+ALL AGGREGATION, VERIFICATION AND REPORT GENERATION COMPLETE

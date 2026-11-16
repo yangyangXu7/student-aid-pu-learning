@@ -1,0 +1,618 @@
+{
+  "status": "PASS",
+  "date": "2026-11-16",
+  "scope": "Packaging and numerical reproduction validation; not a second full retraining of all cohort-scenario cases.",
+  "aggregate_csv_comparison": {
+    "status": "PASS",
+    "tables": [
+      {
+        "file": "capacity_raw.csv",
+        "status": "PASS",
+        "rows": 345600,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "capacity_summary.csv",
+        "status": "PASS",
+        "rows": 4740,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "cohort_metadata.csv",
+        "status": "PASS",
+        "rows": 2360,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "cohort_metrics.csv",
+        "status": "PASS",
+        "rows": 11520,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_capacity_summary.csv",
+        "status": "PASS",
+        "rows": 11220,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_cohort_metrics.csv",
+        "status": "PASS",
+        "rows": 28900,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_main_for_paper.csv",
+        "status": "PASS",
+        "rows": 14,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_mechanisms_for_paper.csv",
+        "status": "PASS",
+        "rows": 54,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_paired_differences.csv",
+        "status": "PASS",
+        "rows": 7260,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_reference_contrasts_for_paper.csv",
+        "status": "PASS",
+        "rows": 9,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_summary_metrics.csv",
+        "status": "PASS",
+        "rows": 4114,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "convergence_sensitivity_raw.csv",
+        "status": "PASS",
+        "rows": 231,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "convergence_sensitivity_summary.csv",
+        "status": "PASS",
+        "rows": 3,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "cross_learner_paired.csv",
+        "status": "PASS",
+        "rows": 44,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "denominator_audit_paired.csv",
+        "status": "PASS",
+        "rows": 187,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "denominator_audit_raw.csv",
+        "status": "PASS",
+        "rows": 1700,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "denominator_audit_summary.csv",
+        "status": "PASS",
+        "rows": 187,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "em_convergence_raw.csv",
+        "status": "PASS",
+        "rows": 5100,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "em_convergence_summary.csv",
+        "status": "PASS",
+        "rows": 66,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "lbe_optimizer_policy_raw.csv",
+        "status": "PASS",
+        "rows": 8500,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "lbe_optimizer_policy_summary.csv",
+        "status": "PASS",
+        "rows": 110,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "main_results_for_paper.csv",
+        "status": "PASS",
+        "rows": 6,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "mechanism_results_for_paper.csv",
+        "status": "PASS",
+        "rows": 8,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "method_diagnostics_raw.csv",
+        "status": "PASS",
+        "rows": 9560,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "method_diagnostics_summary.csv",
+        "status": "PASS",
+        "rows": 233,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "paired_ablation.csv",
+        "status": "PASS",
+        "rows": 44,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "paired_method_differences.csv",
+        "status": "PASS",
+        "rows": 2277,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "propensity_audit_paired.csv",
+        "status": "PASS",
+        "rows": 110,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "propensity_audit_raw.csv",
+        "status": "PASS",
+        "rows": 1000,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "propensity_audit_summary.csv",
+        "status": "PASS",
+        "rows": 110,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "propensity_numerator_diagnostics.csv",
+        "status": "PASS",
+        "rows": 100,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "prospective_sampling_simulation_raw.csv",
+        "status": "PASS",
+        "rows": 400,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "prospective_sampling_simulation_summary.csv",
+        "status": "PASS",
+        "rows": 24,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "reverse_change_in_advantage.csv",
+        "status": "PASS",
+        "rows": 11,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "spy_grid_summary.csv",
+        "status": "PASS",
+        "rows": 9,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "summary_metrics.csv",
+        "status": "PASS",
+        "rows": 1738,
+        "max_abs_numeric_difference": 0.0
+      }
+    ],
+    "comparison": "same columns and row order; numeric rtol=1e-10, atol=1e-12",
+    "models_retrained": false,
+    "plotting_code_used": false
+  },
+  "regenerated_diagnostic_csv_comparison": {
+    "status": "PASS",
+    "tables": [
+      {
+        "file": "denominator_audit_paired.csv",
+        "status": "PASS",
+        "rows": 187,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "denominator_audit_raw.csv",
+        "status": "PASS",
+        "rows": 1700,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "denominator_audit_summary.csv",
+        "status": "PASS",
+        "rows": 187,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "estimated_propensity_quality.csv",
+        "status": "PASS",
+        "rows": 300,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "prospective_sampling_simulation_raw.csv",
+        "status": "PASS",
+        "rows": 400,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "prospective_sampling_simulation_summary.csv",
+        "status": "PASS",
+        "rows": 24,
+        "max_abs_numeric_difference": 0.0
+      }
+    ],
+    "comparison": "same columns and row order; numeric rtol=1e-10, atol=1e-12",
+    "models_retrained": false,
+    "plotting_code_used": false
+  },
+  "seed42_training_smoke": {
+    "status": "PASS",
+    "seed": 42,
+    "scope": "Fresh baseline original HGB procedures and low-spending ranking only",
+    "max_abs_score_difference": 0.0,
+    "exact_scores": true
+  },
+  "em_numerical_checks": {
+    "status": "PASS",
+    "numerical": {
+      "gradient_fd_error": 1.0368755826751668e-05,
+      "soft_vs_duplicated_sklearn_max_probability_error": 6.772498728491172e-08,
+      "joint_likelihood_gradient_fd_error": 1.5098827315108854e-07
+    }
+  },
+  "python_compile": "PASS",
+  "safe_computational_imports": "PASS",
+  "core_source_unchanged": [
+    "generator_r2.py",
+    "models_r2.py",
+    "run_r2.py",
+    "pu_original.py",
+    "synth_original.py",
+    "models_propensity_r2.py",
+    "run_complete_r2.py"
+  ],
+  "plotting_dependencies_in_retained_python": false,
+  "end_to_end_reproduction": {
+    "status": "PASS",
+    "tables": [
+      {
+        "file": "capacity_raw.csv",
+        "status": "PASS",
+        "rows": 345600,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "capacity_summary.csv",
+        "status": "PASS",
+        "rows": 4740,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "cohort_metadata.csv",
+        "status": "PASS",
+        "rows": 2360,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "cohort_metrics.csv",
+        "status": "PASS",
+        "rows": 11520,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_capacity_summary.csv",
+        "status": "PASS",
+        "rows": 11220,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_cohort_metrics.csv",
+        "status": "PASS",
+        "rows": 28900,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_main_for_paper.csv",
+        "status": "PASS",
+        "rows": 14,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_mechanisms_for_paper.csv",
+        "status": "PASS",
+        "rows": 54,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_paired_differences.csv",
+        "status": "PASS",
+        "rows": 7260,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_reference_contrasts_for_paper.csv",
+        "status": "PASS",
+        "rows": 9,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "complete_summary_metrics.csv",
+        "status": "PASS",
+        "rows": 4114,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "convergence_sensitivity_raw.csv",
+        "status": "PASS",
+        "rows": 231,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "convergence_sensitivity_summary.csv",
+        "status": "PASS",
+        "rows": 3,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "cross_learner_paired.csv",
+        "status": "PASS",
+        "rows": 44,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "denominator_audit_paired.csv",
+        "status": "PASS",
+        "rows": 187,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "denominator_audit_raw.csv",
+        "status": "PASS",
+        "rows": 1700,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "denominator_audit_summary.csv",
+        "status": "PASS",
+        "rows": 187,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "em_convergence_raw.csv",
+        "status": "PASS",
+        "rows": 5100,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "em_convergence_summary.csv",
+        "status": "PASS",
+        "rows": 66,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "estimated_propensity_quality.csv",
+        "status": "PASS",
+        "rows": 300,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "lbe_optimizer_policy_raw.csv",
+        "status": "PASS",
+        "rows": 8500,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "lbe_optimizer_policy_summary.csv",
+        "status": "PASS",
+        "rows": 110,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "main_results_for_paper.csv",
+        "status": "PASS",
+        "rows": 6,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "mechanism_results_for_paper.csv",
+        "status": "PASS",
+        "rows": 8,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "method_diagnostics_raw.csv",
+        "status": "PASS",
+        "rows": 9560,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "method_diagnostics_summary.csv",
+        "status": "PASS",
+        "rows": 233,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "paired_ablation.csv",
+        "status": "PASS",
+        "rows": 44,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "paired_method_differences.csv",
+        "status": "PASS",
+        "rows": 2277,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "propensity_audit_paired.csv",
+        "status": "PASS",
+        "rows": 110,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "propensity_audit_raw.csv",
+        "status": "PASS",
+        "rows": 1000,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "propensity_audit_summary.csv",
+        "status": "PASS",
+        "rows": 110,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "propensity_numerator_diagnostics.csv",
+        "status": "PASS",
+        "rows": 100,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "prospective_sampling_simulation_raw.csv",
+        "status": "PASS",
+        "rows": 400,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "prospective_sampling_simulation_summary.csv",
+        "status": "PASS",
+        "rows": 24,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "reverse_change_in_advantage.csv",
+        "status": "PASS",
+        "rows": 11,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "spy_grid_summary.csv",
+        "status": "PASS",
+        "rows": 9,
+        "max_abs_numeric_difference": 0.0
+      },
+      {
+        "file": "summary_metrics.csv",
+        "status": "PASS",
+        "rows": 1738,
+        "max_abs_numeric_difference": 0.0
+      }
+    ],
+    "comparison": "same columns and row order; numeric rtol=1e-10, atol=1e-12",
+    "models_retrained": false,
+    "plotting_code_used": false
+  },
+  "current_figure_source_reproduction": {
+    "status": "PASS",
+    "csv_files": 15,
+    "figures": "Current manuscript Figs 1-8",
+    "plotting_code_used": false,
+    "models_retrained": false,
+    "comparison": "Exact schema/text/row order; numeric atol=1e-12, rtol=0",
+    "files": [
+      {
+        "file": "Fig1_seed42_predictions_U.csv",
+        "rows": 3344,
+        "status": "PASS"
+      },
+      {
+        "file": "Fig1_AP_validation.csv",
+        "rows": 11,
+        "status": "PASS"
+      },
+      {
+        "file": "Fig2_capacity_summary.csv",
+        "rows": 180,
+        "status": "PASS"
+      },
+      {
+        "file": "Fig3_paired_differences.csv",
+        "rows": 16,
+        "status": "PASS"
+      },
+      {
+        "file": "Fig4_plotted_values.csv",
+        "rows": 64,
+        "status": "PASS"
+      },
+      {
+        "file": "Fig5_paired_stress_values.csv",
+        "rows": 11,
+        "status": "PASS"
+      },
+      {
+        "file": "Fig6_plotted_values.csv",
+        "rows": 8,
+        "status": "PASS"
+      },
+      {
+        "file": "summary_metrics.csv",
+        "rows": 1738,
+        "status": "PASS"
+      },
+      {
+        "file": "complete_summary_metrics.csv",
+        "rows": 4114,
+        "status": "PASS"
+      },
+      {
+        "file": "complete_paired_differences.csv",
+        "rows": 7260,
+        "status": "PASS"
+      },
+      {
+        "file": "denominator_audit_summary.csv",
+        "rows": 187,
+        "status": "PASS"
+      },
+      {
+        "file": "em_convergence_summary.csv",
+        "rows": 66,
+        "status": "PASS"
+      },
+      {
+        "file": "prospective_sampling_simulation_summary.csv",
+        "rows": 24,
+        "status": "PASS"
+      },
+      {
+        "file": "spy_grid_summary.csv",
+        "rows": 9,
+        "status": "PASS"
+      },
+      {
+        "file": "stress_absolute_values.csv",
+        "rows": 110,
+        "status": "PASS"
+      }
+    ]
+  },
+  "default_workflow_status": "PASS",
+  "default_workflow_retrained_models": false,
+  "final_scope": "Final CLI regenerated37 archived numerical CSV tables and15 final-figure source CSVs; separate fresh seed42 HGB baseline smoke exactly matched archived predictions. Full benchmark was not retrained during packaging."
+}

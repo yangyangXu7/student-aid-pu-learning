@@ -1,0 +1,26 @@
+使用 PLOS_R2_Code_Data_Results.zip 更新 GitHub
+
+1. 解压后只有一个 plos_r2_experiments 项目目录。
+2. 把这个目录里面的全部文件和子目录复制到本地 GitHub 仓库根目录。
+3. 用本包的 .gitignore 覆盖会排除 *.npz 或 results/ 的旧版本，确保数据和结果一起提交。
+4. 通过 GitHub Desktop 或 Git 提交并推送解压后的全部文件。
+   ZIP 是下载容器，不作为普通仓库文件上传。
+5. 完整基线数据集就在 results/cohorts/baseline/：
+   42_data.npz 至 141_data.npz，共 100 个；每个含 12000 行、14 个特征、
+   y、s 和训练/测试划分。42.npz 是预测文件，42_data.npz 才是完整特征数据。
+6. 安装 requirements-reproduce.txt 后，先运行 python check_datasets.py，
+   再运行 python reproduce_results.py 复现数值汇总，无须再下载其他附件。
+
+这个较小的单 ZIP 保留：全部研究代码和配置、100 个完整基线数据集、
+所有逐队列 JSON 结果记录、全部数值表格文件（含 38 个 CSV）、图表源数据、
+所有基线预测、原方法 seed 42/91/141 的可用场景预测、100 个 logistic_learner
+预测文件，以及所有额外诊断/审计数组。
+
+为缩小下载体积，未附多数非基线场景的逐学生预测 NPZ 缓存；这些场景的
+逐队列数值记录和汇总结果仍在包内。README 的完整重训命令可生成省略的缓存。
+其他场景的完整特征矩阵也由提供的数据生成代码产生。
+
+--verify 检查保留的原方法样本、100 个基线扩展方法预测、数值梯度及额外审计，
+不宣称检查全部 1700 个扩展方法场景的预测数组。
+
+包内没有 manuscript_updates、绘图脚本或 repository/release_assets 拆分。

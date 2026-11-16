@@ -1,4 +1,4 @@
-# Local Python environments and generated outputs
+# Local environments, caches, and new reproduction outputs only
 .venv/
 __pycache__/
 *.py[cod]
@@ -6,16 +6,7 @@ __pycache__/
 /reproduced*/
 /smoke*/
 
-# Full data and per-cohort records are distributed as a Release asset
-*.npz
+# Archive files are delivery containers, not repository contents
 *.zip
-/logs/
-/results/cohorts/
-/results/completion/
-/results/propensity_audit/
-/results/denominator_audit/
-/results/convergence_sensitivity/
-/results/lbe_optimizer_audit/
-/results/tables/*_raw.csv
-/results/tables/cohort_metrics.csv
-/results/tables/complete_cohort_metrics.csv
+
+# Distributed .npz datasets, saved predictions, results/, and logs/ are tracked.

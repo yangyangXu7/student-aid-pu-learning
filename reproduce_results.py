@@ -2,8 +2,10 @@
 """Reproduce numerical results without figures or overwriting archived evidence.
 
 Default: recompute all numerical summaries from saved cohort records and compare
-them with the archived CSVs. No models are retrained. Use --verify for independent
-checks of saved predictions, or --smoke for a fresh seed-42 HGB training run.
+them with the archived CSVs. No models are retrained. Use --verify for numerical
+and retained-prediction checks (the verified scope is recorded), or --smoke for a
+fresh seed-42 HGB training run. Nonbaseline prediction caches omitted from a
+compact distribution do not affect the default numerical aggregation workflow.
 """
 from __future__ import annotations
 
@@ -116,10 +118,87 @@ def smoke(work: Path) -> None:
         raise SystemExit("Smoke scores differ; use the recorded Python and dependency versions.")
 
 
+
+def verify_baseline_completion(work: Path) -> dict:
+    """Recompute every retained baseline method metric and LR consistency check."""
+    import numpy as np
+    sys.path.insert(0, str(work / "code"))
+    from run_r2 import calc_metrics
+    checked_scores = 0
+    max_error = 0.0
+    for seed in range(42, 142):
+        with np.load(work / f"results/completion/baseline/{seed}.npz") as added, np.load(
+            work / f"results/cohorts/baseline/{seed}.npz"
+        ) as base, np.load(work / f"results/cohorts/logistic_learner/{seed}.npz") as logistic:
+            for key in ("ids", "y", "s"):
+                if not np.array_equal(added[key], base[key]):
+                    raise SystemExit(f"Baseline prediction alignment failed: seed {seed}, {key}")
+                if not np.array_equal(added[key], logistic[key]):
+                    raise SystemExit(f"Logistic prediction alignment failed: seed {seed}, {key}")
+            if not np.isfinite(added["scores"]).all() or not np.isfinite(added["propensities"]).all():
+                raise SystemExit(f"Nonfinite baseline predictions: seed {seed}")
+            record = json.loads((work / f"results/completion/baseline/{seed}.json").read_text())
+            rows = {row["model"]: row for row in record["rows"]}
+            names = added["models"].tolist()
+            for name, scores in zip(names, added["scores"]):
+                metrics, _ = calc_metrics(added["y"], added["s"], scores, added["ids"])
+                for metric, value in metrics.items():
+                    expected = rows[name][metric]
+                    if value is None:
+                        if expected is not None:
+                            raise SystemExit(f"Metric mismatch: {seed}, {name}, {metric}")
+                    else:
+                        error = abs(float(value) - float(expected))
+                        max_error = max(max_error, error)
+                        if error > 1e-12:
+                            raise SystemExit(f"Metric mismatch: {seed}, {name}, {metric}: {error}")
+                checked_scores += 1
+            for name in ("Naive", "CostSensitive", "ElkanNoto", "Spy", "TrueLabel"):
+                original = logistic["scores"][logistic["models"].tolist().index(name)]
+                fitted = added["scores"][names.index(name + "_LR")]
+                if not np.array_equal(original, fitted):
+                    raise SystemExit(f"Baseline logistic consistency failed: {seed}, {name}")
+    report = {"status": "PASS", "baseline_cohorts": 100,
+              "completion_score_vectors": checked_scores,
+              "max_recomputed_metric_error": max_error,
+              "logistic_consistency": "all five methods, all 100 baseline cohorts"}
+    (work / "baseline_prediction_verification.json").write_text(json.dumps(report, indent=2))
+    return report
+
+
+def verify_available_predictions(work: Path) -> None:
+    """Report exactly which saved predictions were independently rechecked."""
+    missing = []
+    for family in ("cohorts", "completion"):
+        for record in (work / "results" / family).rglob("*.json"):
+            if not record.with_suffix(".npz").is_file():
+                missing.append(record.relative_to(work).as_posix())
+    # The compact distribution retains the original verifier's three audit seeds
+    # in every scenario, as well as all baseline and logistic-learner predictions.
+    run(work, "verify_r2.py")
+    if missing:
+        run(work, "verify_completion.py", "--numerical-only")
+        baseline = verify_baseline_completion(work)
+    else:
+        run(work, "verify_completion.py")
+        baseline = verify_baseline_completion(work)
+    run(work, "verify_additional_audits.py")
+    report = {"status": "PASS", "models_retrained": False,
+              "full_prediction_cache_available": not missing,
+              "omitted_nonbaseline_prediction_cache_files": len(missing),
+              "original_metric_checks": "audit seeds 42, 91, 141 wherever present in each scenario",
+              "completion_baseline": baseline,
+              "numerical_checks": "logistic and joint-likelihood gradients, soft-label equivalence, posterior identity",
+              "additional_audits": "all included denominator, convergence, and optimizer prediction arrays",
+              "limitation": ("Nonbaseline completion prediction arrays were not independently rechecked; regenerate omitted caches using the full retraining commands for the full prediction audit." if missing else None)}
+    (work / "verification_scope.json").write_text(json.dumps(report, indent=2))
+    print("Verification scope: " + ("retained baseline/audit predictions and numerical checks; full nonbaseline prediction audit requires regenerated caches." if missing else "complete prediction cache available."), flush=True)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=ROOT / "reproduced")
-    parser.add_argument("--verify", action="store_true", help="Also verify saved predictions and numerical gradients")
+    parser.add_argument("--verify", action="store_true", help="Verify numerical calculations and retained prediction arrays; record the exact scope")
     parser.add_argument("--smoke", action="store_true", help="Run one fresh seed-42 baseline; no aggregation")
     args = parser.parse_args()
     if args.smoke and args.verify:
@@ -141,9 +220,7 @@ def main() -> None:
         report = compare_tables(work)
         print(f"Compared {sum(r['status'] == 'PASS' for r in report['tables'])} archived CSV tables.", flush=True)
         if args.verify:
-            run(work, "verify_r2.py")
-            run(work, "verify_completion.py")
-            run(work, "verify_additional_audits.py")
+            verify_available_predictions(work)
     print(f"Completed. New outputs are in {work}", flush=True)
 
 

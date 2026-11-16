@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "scope": "Fresh isolated venv, pip-installed locked dependencies, regenerated seed 42 baseline and logistic runs plus all added methods and conditional propensity audit. Not a repeat of every cohort.",
+  "comparisons": [
+    {
+      "artifact": "results/cohorts/baseline/42.npz",
+      "max_score_difference": 0.0,
+      "bitwise_equal": true,
+      "same_test_ids": true
+    },
+    {
+      "artifact": "results/cohorts/logistic_learner/42.npz",
+      "max_score_difference": 0.0,
+      "bitwise_equal": true,
+      "same_test_ids": true
+    },
+    {
+      "artifact": "results/completion/baseline/42.npz",
+      "max_score_difference": 0.0,
+      "bitwise_equal": true,
+      "same_test_ids": true
+    },
+    {
+      "artifact": "results/propensity_audit/42.npz",
+      "max_score_difference": 0.0,
+      "bitwise_equal": true,
+      "same_test_ids": true
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "checks": [
+    "U-only population, floor, hidden denominator, original-ID tie order and permutation invariance",
+    "Zero shortlist precision undefined; recall zero with positive denominator",
+    "All clean mechanisms: finite features, valid propensity and one-sided labels",
+    "Conditional propensity integral convergence and population identity",
+    "Recomputed all metrics from stored predictions for 79 cohort/scenario files",
+    "Original supplied metrics.csv reproduced at its four-decimal precision",
+    "All original five-method 10-seed AP means and SDs match uploaded aggregate",
+    "All original four-slope, four-method 5-seed AP and hidden-recall means match uploaded sweep",
+    "All original 5-seed feature-ablation AP and hidden-recall means match uploaded aggregate",
+    "Every one of 35 scenarios regenerated at its first seed with exact SHA256 match"
+  ]
+}
