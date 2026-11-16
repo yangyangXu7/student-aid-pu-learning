@@ -1,7 +1,7 @@
 # Student-Aid PU Learning: reproduction materials
 
-This repository contains the reproduction materials for the PLOS ONE manuscript
-PONE-D-26-34973 on positive-unlabeled (PU) learning for student-aid screening.
+This repository contains the reproduction materials for a PLOS ONE manuscript
+on positive-unlabeled (PU) learning for student-aid screening.
 It includes the code, the generated datasets, and the numerical results behind
 the reported tables and figures. All data are simulated; no real student records
 are included.
