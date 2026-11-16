@@ -1,0 +1,93 @@
+NEW R2 IMPLEMENTATIONS (2026-11-11)
+
+These methods were implemented in this run after the source supplied by the
+authors and the public main branch were found not to contain the R1 additions.
+They are new, fully specified experiments, not recovery of historical code or
+verification of the rounded R1 AP=0.969 values. They replace that incomplete
+comparison with rerunnable evidence.
+
+Common inputs
+Only the original 14 observed features and training S are passed to the PU
+learners. StandardScaler is fitted to the training rows. Logistic class models
+use all 14 standardized features plus an intercept. No test Y, latent typicality,
+known propensity, college, or frugal membership is used for fitting. Original
+HGB results remain separate. Fully labeled HGB and logistic learners are named
+true-label REFERENCES; neither defines a universal ceiling.
+
+SAR_EM
+Source: Bekker, Robberechts and Davis, Beyond the Selected Completely at Random
+Assumption for Learning from Positive and Unlabeled Data. ECML PKDD 2019
+proceedings, published 2020, pp. 71-85. doi:10.1007/978-3-030-46147-8_5.
+Author code: https://github.com/ML-KULeuven/SAR-PU
+Inspected commit: 6e4fc3d8c84ac3512669a4e36ffcb5086f5b42a7
+Relevant function: sarpu/sarpu/pu_learning.py, pu_learn_sar_em.
+MIT license supplied in SAR_PU_LICENSE.txt.
+
+The reimplementation follows weighted balanced initialization, alternating
+logistic M-steps and r=S+(1-S)f(1-e)/(1-fe). The propensity features, in order, are
+monthly_total_spend, avg_meal_price, meals_per_day, breakfast_rate,
+weekend_on_campus, canteen_ratio, snack_drink_ratio, low_price_window_ratio,
+supermarket_spend. This 9-feature restriction is a new explicit R2 choice; the
+missing R1 subset is not inferred from the old reported results.
+
+M-steps minimize summed weighted logistic loss plus ||coefficient||^2/2, C=1;
+the intercept is not penalized. They use L-BFGS-B with maxiter=200, ftol=1e-12,
+gtol=1e-7 and maxls=40. Fractional responses are equivalent to duplication into
+positive and negative cases with their corresponding weights; this equivalence
+is numerically checked against sklearn. Iterations stop after at least 12
+updates when mean absolute propensity slope in the last 10 updates <1e-4 and
+the authors' expected-complete-log-likelihood window criterion <1e-4, or at 500.
+
+The final inverse-propensity classifier refit is disabled, corresponding to the
+authors' supported refit_classifier=False option. This avoids undocumented
+handling of negative risk weights in an old liblinear wrapper. Other explicit
+differences from that historical wrapper are standardized inputs, an unpenalized
+intercept, and a current high-accuracy optimizer. This is a specified adaptation,
+not a claim of bitwise reproduction of the authors' old software.
+
+R1_IndexEM
+This is the SAME EM estimator as above, but its propensity model receives only
+H=( -z_spend -z_price +z_meals +z_breakfast +z_weekend +z_canteen
+    -z_snack +z_low_price -z_supermarket )/9.
+z denotes training-standardized observed features. Its logistic intercept and
+slope are freely estimated; there is no sign constraint. Equal signs/weights
+are fixed from the directions stipulated in the original feature generator.
+They are not learned from test performance or individual hidden labels.
+This matches the STYLE described for the restricted-index method in R1 but
+does not recover its unknown exact signs, weights, subset, or initialization.
+It is called Index-EM, not LBE, to avoid misattributing this restriction.
+
+LBE_LF
+Primary paper: Gong et al., Instance-Dependent Positive and Unlabeled Learning
+with Labeling Bias Estimation, IEEE TPAMI, doi:10.1109/TPAMI.2021.3061456.
+Author manuscript: https://gcatnjust.github.io/ChenGong/paper/gong_tpami21.pdf
+Equations 8-14 and Algorithm 1 define logistic class and propensity models and
+EM/Adam learning. Both models here receive ALL 14 features plus an intercept.
+Initialize the classifier using naive logistic regression on S (C=1) and the
+propensity coefficients at zero. Each full-batch iteration computes r, then
+updates both coefficient vectors by Adam on negative expected log likelihood.
+There is no L2 penalty after initialization. Learning rate=.001, beta1=.9,
+beta2=.999, epsilon=1e-8. The maximum is 20,000 updates. Starting after 1,000,
+check every 100 updates: absolute observed-log-likelihood change <1e-7 and
+infinity norm of normalized gradient <1e-5. Gradients are checked against
+finite differences of the observed-data likelihood. Adam is not guaranteed to
+increase likelihood on every update; decreases and convergence are recorded.
+This is our explicit linear implementation, not the authors' original code.
+No correctness-of-specification or identifiability claim follows from high AP.
+
+Outputs and fair comparison
+Each method's primary score is f(X), evaluated on full test students and on U
+separately. An additional score f(1-e)/(1-fe) is saved as *_UPosterior, clearly
+separate from the main comparison. The logistic references use C=1 whereas
+LBE's fitted likelihood is unpenalized, so these comparisons match a model
+family, not every regularization/optimization choice. The known population
+posterior is simulator-assisted and is not counted as a deployable PU method.
+
+All 1,700 paired main/beta/mechanism/stress/alternative-generator cases run
+the three estimators plus five logistic versions of the original strategies.
+Convergence flags are included for every fit, with no deletion of poor-performing
+cohorts or selection of a method using test Y.
+
+Numerical detail for supplementary *_UPosterior scores: the denominator 1-f*e
+is floored at 1e-15. These are model-based scores, not known population
+conditionals. The primary benchmark uses f(X) directly.

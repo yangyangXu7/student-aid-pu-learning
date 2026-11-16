@@ -1,0 +1,36 @@
+scenario,group,n_cohorts,seed_start,seed_end,learner,parameters,dropped_features,spy_fraction,spy_quantile
+baseline,main,100,42,141,hgb,{},[],0.15,5
+beta_0.0,beta,100,42,141,hgb,"{""label_intercept"": 0.55, ""label_slope"": 0.0, ""label_lo"": 0.1, ""label_hi"": 0.92}",[],0.15,5
+beta_0.3,beta,100,42,141,hgb,"{""label_intercept"": 0.7150000000000001, ""label_slope"": 0.3, ""label_lo"": 0.1, ""label_hi"": 0.92}",[],0.15,5
+beta_0.62,beta,100,42,141,hgb,"{""label_intercept"": 0.891, ""label_slope"": 0.62, ""label_lo"": 0.1, ""label_hi"": 0.92}",[],0.15,5
+beta_0.9,beta,100,42,141,hgb,"{""label_intercept"": 1.0450000000000002, ""label_slope"": 0.9, ""label_lo"": 0.1, ""label_hi"": 0.92}",[],0.15,5
+logistic,mechanism,100,42,141,hgb,"{""mechanism"": ""logistic""}",[],0.15,5
+threshold,mechanism,100,42,141,hgb,"{""mechanism"": ""threshold""}",[],0.15,5
+heterogeneous,mechanism,100,42,141,hgb,"{""mechanism"": ""heterogeneous""}",[],0.15,5
+reverse,mechanism,100,42,141,hgb,"{""mechanism"": ""reverse""}",[],0.15,5
+nonmonotonic,mechanism,100,42,141,hgb,"{""mechanism"": ""nonmonotonic""}",[],0.15,5
+unobserved,mechanism,100,42,141,hgb,"{""mechanism"": ""unobserved""}",[],0.15,5
+poor_rate_0.05,stress,50,42,91,hgb,"{""poor_rate"": 0.05}",[],0.15,5
+poor_rate_0.25,stress,50,42,91,hgb,"{""poor_rate"": 0.25}",[],0.15,5
+frugal_rate_0.0,stress,50,42,91,hgb,"{""frugal_rate"": 0.0}",[],0.15,5
+frugal_rate_0.25,stress,50,42,91,hgb,"{""frugal_rate"": 0.25}",[],0.15,5
+overlap_0.5,stress,50,42,91,hgb,"{""overlap"": 0.5}",[],0.15,5
+overlap_1.0,stress,50,42,91,hgb,"{""overlap"": 1.0}",[],0.15,5
+noise_scale_1.5,stress,50,42,91,hgb,"{""noise_scale"": 1.5}",[],0.15,5
+noise_scale_2.0,stress,50,42,91,hgb,"{""noise_scale"": 2.0}",[],0.15,5
+false_positive_rate_0.01,stress,50,42,91,hgb,"{""false_positive_rate"": 0.01}",[],0.15,5
+false_positive_rate_0.03,stress,50,42,91,hgb,"{""false_positive_rate"": 0.03}",[],0.15,5
+alternative_factors,alternative,100,42,141,hgb,"{""generator"": ""factors""}",[],0.15,5
+drop_consumption_level,ablation,100,42,141,hgb,{},"[""monthly_total_spend"", ""avg_meal_price"", ""supermarket_spend""]",0.15,5
+drop_consumption_structure,ablation,100,42,141,hgb,{},"[""canteen_ratio"", ""snack_drink_ratio"", ""low_price_window_ratio""]",0.15,5
+drop_behavioral_regularity,ablation,100,42,141,hgb,{},"[""meals_per_day"", ""breakfast_rate"", ""weekend_on_campus""]",0.15,5
+drop_noncard_records,ablation,100,42,141,hgb,{},"[""library_visits"", ""dorm_night_out"", ""score_rank_pct""]",0.15,5
+logistic_learner,base_learner,100,42,141,logistic,{},[],0.15,5
+spy_f0.05_q1,spy_grid,20,42,61,hgb,{},[],0.05,1
+spy_f0.05_q5,spy_grid,20,42,61,hgb,{},[],0.05,5
+spy_f0.05_q10,spy_grid,20,42,61,hgb,{},[],0.05,10
+spy_f0.15_q1,spy_grid,20,42,61,hgb,{},[],0.15,1
+spy_f0.15_q10,spy_grid,20,42,61,hgb,{},[],0.15,10
+spy_f0.3_q1,spy_grid,20,42,61,hgb,{},[],0.3,1
+spy_f0.3_q5,spy_grid,20,42,61,hgb,{},[],0.3,5
+spy_f0.3_q10,spy_grid,20,42,61,hgb,{},[],0.3,10

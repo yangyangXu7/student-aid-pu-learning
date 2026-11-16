@@ -1,0 +1,24 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "reportlab": "4.4.9",
+    "pypdf": "6.21.4",
+    "threadpoolctl": "3.6.0",
+    "joblib": "1.5.3",
+    "Pillow": "13.0.0"
+  },
+  "threads_per_process": 1,
+  "workers": 6,
+  "cohort_seeds": "42..141 (100), 42..91 (50), 42..61 (20)",
+  "split_seed": 7,
+  "algorithm_seed": 0,
+  "completion_workers": 8,
+  "completion_threads_per_process": 1,
+  "clean_environment_check": "results/clean_environment_reproduction.json"
+}

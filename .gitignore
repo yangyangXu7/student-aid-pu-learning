@@ -1,0 +1,21 @@
+# Local Python environments and generated outputs
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+/reproduced*/
+/smoke*/
+
+# Full data and per-cohort records are distributed as a Release asset
+*.npz
+*.zip
+/logs/
+/results/cohorts/
+/results/completion/
+/results/propensity_audit/
+/results/denominator_audit/
+/results/convergence_sensitivity/
+/results/lbe_optimizer_audit/
+/results/tables/*_raw.csv
+/results/tables/cohort_metrics.csv
+/results/tables/complete_cohort_metrics.csv

@@ -1,55 +1,173 @@
-# Student-Aid PU Learning
+# PLOS ONE R2 numerical reproduction
 
-Identifying economically disadvantaged students from campus behavioural data using **positive and unlabeled (PU) learning**.
+This package contains the code, generated data, saved predictions, and numerical
+results for manuscript PONE-D-26-34973. It supports the 100-cohort baseline,
+eight labeling mechanisms, capacity analyses, feature ablations, stress settings,
+alternative generator, propensity diagnostics, and verification sampling study.
+Plotting scripts and figure images are excluded. Numerical computations formerly
+embedded in the plotting scripts are retained in `code/make_numerical_tables.py`.
 
-## Overview
+## Code package and reproduction inputs
 
-Need-based financial aid is identified from campus behavioural records, but the administrative aid roster only records students who applied and were confirmed. Students who never applied are therefore *unlabeled*, not negative — a setting that standard supervised classifiers handle incorrectly. This repository implements a PU-learning treatment of the problem: positive examples (confirmed aid recipients) plus a large unlabeled set, with methods that explicitly account for instance-dependent labeling.
+This repository contains computational code, the numerical reproduction entry
+point, environment specifications, and method documentation. Generated datasets,
+saved predictions, and numerical result files are distributed separately in
+`PLOS_R2_Full_Reproduction.zip`.
 
-## Repository layout
+To reproduce results, obtain that complete archive and extract it. Work from
+its `plos_r2_experiments/` directory, which includes the required inputs and
+retains the same code layout. The code-only checkout does not include these
+inputs. No external student records are required.
 
-| File | Purpose |
-|---|---|
-| `pu_methods.py` | PU estimators: Naive (U as N), Cost-sensitive, Spy two-step, Elkan–Noto weighted, and an Oracle ceiling built on true labels |
-| `features_real.py` | Feature builder for the real campus records (card / dorm / library / score / subsidy) |
-| `run_experiments.py` | End-to-end PU experiment and figures (synthetic mode by default; real mode optional) |
-| `multi_seed.py` | Robustness aggregation of the full comparison over multiple random seeds |
-| `sensitivity.py` | Labeling-mechanism sweep (β) and feature-group ablation |
-| `requirements.txt` | Python dependencies |
+For retraining from the supplied generators, see the full retraining commands
+below. Historical packaging provenance under `protocol/` refers to earlier
+split archives and is retained as history.
 
-## Installation
+## Environment
 
-```
-pip install -r requirements.txt
-```
+Use Python **3.12.14** and the numerical dependency versions in
+`requirements-reproduce.txt`:
 
-Dependencies: `numpy>=1.24`, `pandas>=2.0`, `scikit-learn>=1.3`, `matplotlib>=3.7`.
-
-## Usage
-
-### 1. Build features from real campus records
-
-```
-python features_real.py --peek data/raw/train    # inspect the column layout first
-python features_real.py --build data/raw/train   # writes data/features_real.csv
-```
-
-`features_real.py` documents the expected raw files (`card_*.txt`, `dorm_*.txt`, `library_*.txt`, `score_*.txt`, `subsidy_*.txt`) and a `CONFIG` dict to adjust column indices if your mirror differs.
-
-### 2. Run the PU experiment
-
-```
-python run_experiments.py              # synthetic mode (default)
-python run_experiments.py --mode real  # requires data/features_real.csv
+```bash
+python -m venv .venv
+# Activate the environment using your operating system's usual command.
+python -m pip install -r requirements-reproduce.txt
 ```
 
-Outputs (metrics, evaluation arrays, figures) are written to `results/`.
+`requirements-complete-lock.txt` and `environment.json` retain the historical
+execution environment, including packages used for the original reports/figures.
+The smaller reproduction requirements do not install plotting or PDF libraries.
+Recorded model parameters are in `model_parameters.json`.
 
-### 3. Robustness and sensitivity analyses
+## Reproduce the numerical results
 
+From inside `plos_r2_experiments`:
+
+```bash
+python reproduce_results.py
 ```
-python multi_seed.py    # aggregate metrics over multiple seeds
-python sensitivity.py   # labeling-mechanism sweep + feature-group ablation
+
+The default workflow recomputes numerical summaries, paired bootstrap intervals,
+propensity/sampling diagnostics, optimization summaries, the Spy parameter grid,
+paper tables, and the numerical CSV data underlying the eight final figures.
+It uses saved records and prediction arrays; it does not
+retrain all models. The 10,000-resample bootstrap can take several minutes.
+
+New outputs go into `reproduced/results/tables/`. The archived `results/` files
+are preserved. `reproduced/comparison_report.json` compares regenerated CSVs with
+the archive using matching row order and columns, with numerical tolerances
+`rtol=1e-10` and `atol=1e-12`. An existing output directory is never overwritten;
+use `--output` to select another directory.
+
+Figure source CSVs are regenerated in `reproduced/results/figure_source_data/`
+and compared to the archived values by `code/export_figure_data.py`. This exports
+numbers only; it does not draw or save figures.
+
+For independent checks of the saved predictions, label/ID alignment, shortlist
+metrics, and EM numerical calculations:
+
+```bash
+python reproduce_results.py --verify --output reproduced_verified
 ```
 
+To retrain only the seed-42 baseline HGB procedures and compare their scores:
 
+```bash
+python reproduce_results.py --smoke --output smoke_seed42
+```
+
+The smoke run is a small reproducibility check, not a rerun of every model and
+scenario. It writes `smoke_report.json` with the observed prediction difference.
+
+The wrapper creates an isolated working tree. Immutable cohort/prediction inputs
+may be hardlinked where supported, otherwise copied. Regenerated diagnostic
+records and output tables use independent files. Do not edit input files inside
+the working tree: treat them as read-only.
+
+## Main numerical outputs
+
+| Manuscript content | File or source |
+| --- | --- |
+| Table 1 and baseline comparisons | `results/tables/complete_summary_metrics.csv`; `complete_main_for_paper.csv` |
+| Paired baseline reference comparisons | `results/tables/complete_paired_differences.csv`; `complete_reference_contrasts_for_paper.csv` |
+| Table 2 feature ablation | `results/tables/summary_metrics.csv`; `paired_ablation.csv` |
+| Table 3 and labeling mechanisms | `results/tables/complete_summary_metrics.csv`; `complete_paired_differences.csv`; `mechanism_results_for_paper.csv` |
+| Fig 1 underlying precision-recall values | `results/cohorts/baseline/42.npz`; `results/completion/baseline/42.npz` |
+| Fig 2 capacity means and intervals | `results/tables/capacity_summary.csv` |
+| Fig 3 paired HGB differences | `results/tables/paired_method_differences.csv` |
+| Fig 4 logistic and propensity comparisons | `results/tables/complete_paired_differences.csv` |
+| Fig 5 stress and alternative-generator comparisons | `results/tables/complete_paired_differences.csv`; `complete_summary_metrics.csv` |
+| Fig 6 denominator diagnostics | `results/tables/denominator_audit_summary.csv`; `denominator_audit_paired.csv` |
+| Fig 7 slope sensitivity | `results/tables/summary_metrics.csv` using `beta_*` scenarios |
+| Fig 8 verification sampling | `results/tables/prospective_sampling_simulation_raw.csv`; `prospective_sampling_simulation_summary.csv` |
+| Spy parameter sensitivity | `results/tables/spy_grid_summary.csv` |
+| Numerical stopping and optimization | `results/tables/em_convergence_summary.csv`; `convergence_sensitivity_summary.csv`; `lbe_optimizer_policy_summary.csv` |
+
+These paths refer to numerical data, not to rendering scripts. The paper figure
+artwork is submitted separately. The baseline `complete_main_for_paper.csv`
+retains additional capacity columns beyond the condensed manuscript table.
+
+## Methods and interpretation
+
+Read `docs/GENERATOR_SPECIFICATION.md` and `docs/ALGORITHM_SPECIFICATION.md`, plus
+the parameter tables in `protocol/`. The executable definitions are in
+`code/generator_r2.py`, `code/run_r2.py`, `code/models_r2.py`, and
+`code/models_propensity_r2.py`. `protocol/additional_methods.txt` describes the
+expanded EM implementations and their departures from historical author code.
+
+All numerical results concern stipulated generated populations. There are 2,360
+original cohort-scenario jobs and 1,700 expanded-method cases; seeds are reused
+across scenarios, so these are not counts of independent populations. Methods
+within a case share the same students and split. Baseline/mechanism/slope/
+ablation/alternative settings use 100 cohorts; stress settings use 50 and Spy-grid
+cells use 20. Full-test metrics and metrics restricted to unlabeled students are
+distinct. Primary iteration-cap outcomes are retained, with extended-budget and
+same-objective audits reported separately.
+
+Some unmodified computational source docstrings retain historical wording. The
+current manuscript and specifications distinguish simulation inputs from empirical
+calibration and true-label learner references from universal performance bounds.
+Core computational source bytes were preserved so their recorded cache hashes
+remain auditable. Historical records under `logs/` and pre-existing verification
+JSONs describe the original runs, not fresh full-benchmark reruns during packaging.
+The new packaging validation is reported separately in `packaging_validation.json`.
+
+## Full retraining
+
+For a genuine fresh rerun, make a separate copy of this repository, rename its
+`results` directory to `results_archived`, and create an empty `results` directory.
+Keep `original/`, `code/`, environment files, and specifications. Do not remove
+the archived results from your original copy. Then run, in this order:
+
+```bash
+python code/run_r2.py --suite all --workers 6
+python code/propensity_audit.py --seeds 100 --workers 2
+python code/summarize_r2.py
+python code/verify_r2.py
+python code/run_complete_r2.py --workers 8
+python code/diagnostics_complete_r2.py
+python code/diagnostics_complete_r2.py --fitted-only
+python code/convergence_sensitivity.py
+python code/polish_capped_lbe.py --workers 4
+python code/aggregate_optimizer_audit.py
+python code/summarize_completion.py
+python code/summarize_numerical_sensitivity.py
+python code/make_numerical_tables.py
+python code/export_figure_data.py
+python code/verify_completion.py
+python code/verify_additional_audits.py
+```
+
+This reruns the large benchmark and can be computationally expensive. The worker
+counts can be reduced. Numerical-library thread counts are fixed to one. Runners
+reuse cached files only if recorded source/configuration hashes match; mismatches
+raise errors instead of silently reusing incompatible results.
+
+`original/` contains historical reference CSVs and source copies required for
+the original-result verification. Those old metrics are not substitutes for the
+current R2 tables. `original/features_real.py` is the optional archival utility
+for processing external campus records. It is not called by the numerical
+reproduction pipeline, and this package contains no external individual student
+records. Its presence does not establish whether such records were accessed at
+an earlier stage of the study. The third-party SAR-PU license is retained in
+`protocol/SAR_PU_LICENSE.txt`.
